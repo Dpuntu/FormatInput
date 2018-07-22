@@ -3,7 +3,7 @@
 - 整型和小数金额、电话和区号座机号码、美刀、积分、分组等格式化输入
 
 ## ScreenRecord
-![](https://github.com/Dpuntu/FormatInput/tree/master/image/show.gif)
+![](https://github.com/Dpuntu/FormatInput/blob/master/image/show.gif)
 
 > ## 功能详细说明
 > - CustomItemInputView
