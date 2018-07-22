@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.dpuntu.editui.CustomItemInputView
+        android:id="@+id/centerPwdEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_10"
+        app:item_gravity="left"
+        app:item_input_type="pwd"
+        app:item_line_width="@dimen/size_2"
+        app:item_max_length="4"
+        app:item_normal_color="@color/brand_color_blue"
+        app:item_press_color="@color/grey_3"
+        app:item_pwd_text="☀"
+        app:item_round_radius="@dimen/size_2"
+        app:item_size="@dimen/size_44"
+        app:item_space_size="@dimen/size_10"
+        app:item_style="line"
+        app:item_text_color="@color/brand_color_blue"
+        app:item_text_size="@dimen/font_18" />
+
+    <com.dpuntu.editui.CustomItemInputView
+        android:id="@+id/centerPinEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_10"
+        app:item_gravity="left"
+        app:item_input_type="pin"
+        app:item_line_width="@dimen/size_2"
+        app:item_max_length="6"
+        app:item_normal_color="@color/brand_color_blue"
+        app:item_press_color="@color/grey_3"
+        app:item_round_radius="@dimen/size_2"
+        app:item_size="@dimen/size_44"
+        app:item_space_size="@dimen/size_10"
+        app:item_style="line"
+        app:item_text_color="@color/brand_color_blue"
+        app:item_text_size="@dimen/font_18" />
+
+    <com.dpuntu.editui.CustomItemInputView
+        android:id="@+id/centerPwdEdit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_10"
+        app:item_input_type="pwd"
+        app:item_line_width="@dimen/size_2"
+        app:item_max_length="6"
+        app:item_pwd_text="★"
+        app:item_round_radius="@dimen/size_2"
+        app:item_size="@dimen/size_44"
+        app:item_text_size="@dimen/font_18" />
+
+    <com.dpuntu.editui.CustomItemInputView
+        android:id="@+id/centerPinEdit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:maxLength="6"
+        android:padding="@dimen/size_10"
+        app:item_gravity="center"
+        app:item_input_type="pin"
+        app:item_line_width="@dimen/size_2"
+        app:item_round_radius="@dimen/size_2"
+        app:item_size="@dimen/size_44"
+        app:item_space_size="@dimen/size_10"
+        app:item_style="square"
+        app:item_text_color="@color/brand_color_blue"
+        app:item_text_size="@dimen/font_18" />
+
+    <com.dpuntu.editui.CustomItemInputView
+        android:id="@+id/centerPinEdit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_gravity="right"
+        app:item_input_type="pin"
+        app:item_line_width="@dimen/size_2"
+        app:item_round_radius="@dimen/size_2"
+        app:item_size="@dimen/size_44"
+        app:item_space_size="@dimen/size_10"
+        app:item_style="line"
+        app:item_text_color="@color/brand_color_blue"
+        app:item_text_size="@dimen/font_18" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="发送验证码" />
+
+        <com.dpuntu.editui.CustomItemInputView
+            android:id="@+id/centerPwdEdit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/textview"
+            app:item_input_type="pwd"
+            app:item_line_width="@dimen/size_2"
+            app:item_max_length="4"
+            app:item_normal_color="@color/brand_color_blue"
+            app:item_press_color="@color/grey_3"
+            app:item_pwd_text="☀"
+            app:item_round_radius="@dimen/size_2"
+            app:item_size="@dimen/size_30"
+            app:item_space_size="@dimen/size_10"
+            app:item_style="line"
+            app:item_text_color="@color/brand_color_blue"
+            app:item_text_size="@dimen/font_12" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/changeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="改变输入方式" />
+</LinearLayout>

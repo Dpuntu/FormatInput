@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phoneEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_phone_delimit_string="-"
+        app:input_phone_delimit_support="true"
+        app:input_phone_format_support="true"
+        app:input_phone_mobile_only="false"
+        app:input_type="phone" />
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phoneIntEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_number_integer_length="7"
+        app:input_type="integer" />
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phoneDecEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_number_decimal_length="2"
+        app:input_number_integer_length="7"
+        app:input_type="decimal" />
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phoneGroupEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_group_format_string="¥"
+        app:input_group_item_length="7"
+        app:input_group_item_size="3"
+        app:input_group_type="number"
+        app:input_type="group" />
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phonePointEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_point_delimit=","
+        app:input_point_item_length="4"
+        app:input_point_length="12"
+        app:input_type="point" />
+
+    <com.dpuntu.editui.CustomFormatEditText
+        android:id="@+id/phoneMoneyEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_number_decimal_length="1"
+        app:input_number_integer_length="7"
+        app:input_number_support_decimal="false"
+        app:input_type="money" />
+
+    <Button
+        android:id="@+id/showContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SHOW" />
+</LinearLayout>

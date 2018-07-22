@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomItemInputView">
+        <attr name="item_space_size" format="dimension" />
+        <attr name="item_size" format="dimension" />
+        <attr name="item_max_length" format="integer" />
+        <attr name="item_line_width" format="dimension" />
+        <attr name="item_round_radius" format="dimension" />
+        <attr name="item_text_color" format="color" />
+        <attr name="item_text_size" format="dimension" />
+        <attr name="item_normal_color" format="dimension" />
+        <attr name="item_press_color" format="dimension" />
+        <attr name="item_pwd_text" format="string" />
+        <attr name="item_input_type">
+            <flag name="pin" value="0" />
+            <flag name="pwd" value="1" />
+        </attr>
+        <attr name="item_gravity">
+            <flag name="left" value="0" />
+            <flag name="center" value="1" />
+            <flag name="right" value="2" />
+        </attr>
+        <attr name="item_style">
+            <flag name="line" value="0" />
+            <flag name="square" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomFormatEditText">
+        <attr name="input_length" format="integer" />
+        <!-- PHONE -->
+        <attr name="input_phone_mobile_only" format="boolean" />
+        <attr name="input_phone_delimit_support" format="boolean" />
+        <attr name="input_phone_delimit_string" format="string" />
+        <attr name="input_phone_format_support" format="boolean" />
+        <attr name="input_phone_format_string" format="string" />
+        <!-- PHONE -->
+        <!-- NUMBER -->
+        <attr name="input_number_support_decimal" format="boolean" />
+        <attr name="input_number_integer_length" format="integer" />
+        <attr name="input_number_decimal_length" format="integer" />
+        <!-- NUMBER -->
+        <!-- GROUP -->
+        <attr name="input_group_type">
+            <flag name="number" value="10" />
+            <flag name="letter" value="11" />
+            <flag name="all" value="12" />
+        </attr>
+        <attr name="input_group_item_length" format="integer" />
+        <attr name="input_group_item_size" format="integer" />
+        <attr name="input_group_format_string" format="string" />
+        <!-- GROUP -->
+        <!-- POINT -->
+        <attr name="input_point_length" format="integer" />
+        <attr name="input_point_item_length" format="integer" />
+        <attr name="input_point_delimit" format="string" />
+        <!-- POINT -->
+        <attr name="input_type">
+            <flag name="phone" value="0" />
+            <flag name="group" value="1" />
+            <flag name="money" value="2" />
+            <flag name="point" value="3" />
+            <flag name="integer" value="4" />
+            <flag name="decimal" value="5" />
+        </attr>
+    </declare-styleable>
+</resources>
