@@ -23,6 +23,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
     private var mIsSupportFormatter: Boolean = false
     private var mFormatterString: String = UtilEditTextFilter.EMPTY
     private var mIsSupportDecimal: Boolean = true
+    private var mIsSupportFirstZero: Boolean = false
     private var mMaxIntegerLength: Int = 7
     private var mMaxDecimalLength: Int = 2
     private var mMoneyFormatterString: String = UtilEditTextFilter.MONEY_PRE
@@ -59,6 +60,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
             mIsSupportFormatter = a.getBoolean(R.styleable.CustomFormatEditText_input_phone_format_support, mIsSupportFormatter)
             mFormatterString = a.getString(R.styleable.CustomFormatEditText_input_phone_format_string) ?: mFormatterString
             mIsSupportDecimal = a.getBoolean(R.styleable.CustomFormatEditText_input_number_support_decimal, mIsSupportDecimal)
+            mIsSupportFirstZero = a.getBoolean(R.styleable.CustomFormatEditText_input_number_support_first_zero, mIsSupportFirstZero)
             mMaxIntegerLength = a.getInt(R.styleable.CustomFormatEditText_input_number_integer_length, mMaxIntegerLength)
             mMaxDecimalLength = a.getInt(R.styleable.CustomFormatEditText_input_number_decimal_length, mMaxDecimalLength)
             mGroupInputType = a.getInt(R.styleable.CustomFormatEditText_input_group_type, mGroupInputType)
@@ -102,7 +104,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
         }
     }
 
-    fun addInputType(inputType: Int) {
+    private fun addInputType(inputType: Int) {
         mCurrentInputType = inputType
         filters = arrayOf()
         when (mCurrentInputType) {
@@ -110,7 +112,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
             INPUT_GROUP -> addInputFilter(UtilEditTextFilter.GroupFilter(mGroupInputType, mSupportGroupSize, mGroupItemLength, mGroupItemString), true)
             INPUT_MONEY -> addInputFilter(UtilEditTextFilter.MoneyFilter(mIsSupportDecimal, mMaxIntegerLength, mMaxDecimalLength), true)
             INPUT_POINT -> addInputFilter(UtilEditTextFilter.PointFilter(mMaxPointLength, mPointItemLength, mPointFormatterString), true)
-            INPUT_INTEGER -> addInputFilter(UtilEditTextFilter.IntegerFilter(mMaxIntegerLength), true)
+            INPUT_INTEGER -> addInputFilter(UtilEditTextFilter.IntegerFilter(mMaxIntegerLength, mIsSupportFirstZero), true)
             INPUT_DECIMAL -> addInputFilter(UtilEditTextFilter.DecimalFilter(mMaxIntegerLength, mMaxDecimalLength), true)
             else -> {
             }
@@ -133,6 +135,8 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
     fun addInputFilter(inputFilter: UtilEditTextFilter.AbsInputFilter) {
         addInputFilter(inputFilter, false)
     }
+
+    fun currentInputType() = mCurrentInputType
 
     private fun findArgumentsFromFilter(inputFilter: UtilEditTextFilter.AbsInputFilter) {
         when (mCurrentInputType) {
@@ -169,6 +173,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
             INPUT_INTEGER -> {
                 if (inputFilter is UtilEditTextFilter.IntegerFilter) {
                     mMaxIntegerLength = inputFilter.maxIntegerLength()
+                    mIsSupportFirstZero = inputFilter.isSupportFirstZero()
                 }
             }
             INPUT_DECIMAL -> {
@@ -183,11 +188,11 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
     }
 
     fun unFormatterString(): String {
-        if (mCurrentInputType != mCurrentInputFilter?.inputType()) throw IllegalStateException("change InputType in InputFilter")
+        if (mCurrentInputFilter != null && mCurrentInputType != mCurrentInputFilter?.inputType()) throw IllegalStateException("change InputType in InputFilter")
         val mCurrentInputText = text.toString()
         return when (mCurrentInputType) {
             INPUT_PHONE -> if (mIsOnlyMobilePhone && mIsSupportFormatter) mCurrentInputText.replace(mFormatterString, "") else mCurrentInputText
-            INPUT_GROUP -> mCurrentInputText
+            INPUT_GROUP -> mCurrentInputText.replace(mGroupItemString, "")
             INPUT_MONEY -> mCurrentInputText.replace(mMoneyFormatterString, "")
             INPUT_POINT -> mCurrentInputText.replace(mPointFormatterString, "")
             INPUT_INTEGER -> mCurrentInputText
@@ -206,7 +211,7 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
 
     override fun afterTextChanged(s: Editable) {
         Log.d(TAG, "TextWatcher-after , Editable = $s , mPointFormatterString = $mPointFormatterString")
-        mOnEditTextChange(unFormatterString())
+        if (this.hasFocus()) mOnEditTextChange(unFormatterString())
         if (mCurrentInputType == INPUT_POINT) {
             val pointText = unFormatterString()
             if (pointText.length <= 3) {
@@ -222,6 +227,14 @@ class CustomFormatEditText : android.support.v7.widget.AppCompatEditText, TextWa
             }
             val targetPointString = String(reversedPointList.toCharArray()).reversed()
             if (s.toString() == targetPointString) return else setText(targetPointString)
+            setSelection(text.length)
+        }
+        if (mCurrentInputType == INPUT_INTEGER) {
+            val inputText = text.toString()
+            var targetString = inputText
+            if (inputText.startsWith(UtilEditTextFilter.ZERO) && inputText.length > 1)
+                targetString = inputText.substring(1)
+            if (s.toString() == targetString) return else setText(targetString)
             setSelection(text.length)
         }
     }
